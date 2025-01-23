@@ -18,6 +18,8 @@ app.use(logger("dev"));
 
 // SwaggerAi
 app.use(express.static(path.join(__dirname, "swaggerAi")));
+// Uploads
+app.use(express.static(path.join(__dirname, "uploads")));
 
 // Routers
 app.use("/v1", routes);
