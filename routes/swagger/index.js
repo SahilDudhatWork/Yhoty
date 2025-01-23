@@ -5,14 +5,8 @@ const fs = require("fs");
 const path = require("path");
 
 // Load Swagger JSON Files
-const adminSwaggerPath = path.join(
-  __dirname,
-  "../../swaggerAi/admin_openapi.json"
-);
-const userSwaggerPath = path.join(
-  __dirname,
-  "../../swaggerAi/user_openapi.json"
-);
+const adminSwaggerPath = path.join(__dirname, "../../swaggerAi/admin_openapi.json");
+const userSwaggerPath = path.join(__dirname, "../../swaggerAi/user_openapi.json");
 
 // Read JSON Files Dynamically (Ensure they exist)
 const adminSwagger = fs.existsSync(adminSwaggerPath)
