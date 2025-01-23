@@ -1,19 +1,28 @@
 const { Router } = require("express");
 const router = Router();
-
 const swaggerUi = require("swagger-ui-express");
-const adminSwagger = require("../../swaggerAi/admin_openapi.json");
-const userSwagger = require("../../swaggerAi/user_openapi.json");
+const fs = require("fs");
+const path = require("path");
 
-router.use(
-  "/admin/api-docs",
-  swaggerUi.serveFiles(adminSwagger),
-  swaggerUi.setup(adminSwagger)
+// Load Swagger JSON Files
+const adminSwaggerPath = path.join(
+  __dirname,
+  "../../swaggerAi/admin_openapi.json"
 );
-router.use(
-  "/user/api-docs",
-  swaggerUi.serveFiles(userSwagger),
-  swaggerUi.setup(userSwagger)
+const userSwaggerPath = path.join(
+  __dirname,
+  "../../swaggerAi/user_openapi.json"
 );
+
+// Read JSON Files Dynamically (Ensure they exist)
+const adminSwagger = fs.existsSync(adminSwaggerPath)
+  ? JSON.parse(fs.readFileSync(adminSwaggerPath, "utf-8"))
+  : {};
+const userSwagger = fs.existsSync(userSwaggerPath)
+  ? JSON.parse(fs.readFileSync(userSwaggerPath, "utf-8"))
+  : {};
+
+router.use("/admin/api-docs", swaggerUi.serve, swaggerUi.setup(adminSwagger));
+router.use("/user/api-docs", swaggerUi.serve, swaggerUi.setup(userSwagger));
 
 module.exports = router;
