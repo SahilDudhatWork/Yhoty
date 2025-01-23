@@ -46,10 +46,10 @@ const update = async (req, res) => {
     }
 
     body.profilePicture =
-      files["profilePicture"]?.[0]?.path || fetchUser.profilePicture;
+      files["profilePicture"]?.[0]?.path || fetchUser?.profilePicture;
     body.document = {
-      front: files["document_front"]?.[0]?.path || fetchUser.document.front,
-      back: files["document_back"]?.[0]?.path || fetchUser.document.back,
+      front: files["document_front"]?.[0]?.path || fetchUser?.document.front,
+      back: files["document_back"]?.[0]?.path || fetchUser?.document.back,
     };
 
     const updateData = await User.findByIdAndUpdate(
