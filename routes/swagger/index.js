@@ -2,8 +2,8 @@ const { Router } = require("express");
 const router = Router();
 
 const swaggerUi = require("swagger-ui-express");
-const adminSwagger = require("../../swaggerAi/admin_openapi.json");
-const userSwagger = require("../../swaggerAi/user_openapi.json");
+const adminSwagger = require("../../public/swaggerAi/admin_openapi.json");
+const userSwagger = require("../../public/swaggerAi/user_openapi.json");
 
 router.use(
   "/admin/api-docs",
