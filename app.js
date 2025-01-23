@@ -11,9 +11,8 @@ const { PORT } = process.env;
 require("dotenv").config();
 
 // Body-parser
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public"))); 
 app.use(cors({ origin: "*" }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
 
