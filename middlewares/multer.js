@@ -42,7 +42,7 @@ const path = require("path");
 const fs = require("fs");
 
 // Ensure the uploads folder exists
-const uploadsDir = path.join(__dirname, "../uploads");
+const uploadsDir = path.join(__dirname, "../public/uploads");
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
