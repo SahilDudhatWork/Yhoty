@@ -33,6 +33,9 @@
       "name": "Profile"
     },
     {
+      "name": "Dashboard"
+    },
+    {
       "name": "Setting"
     },
     {
@@ -46,6 +49,9 @@
     },
     {
       "name": "Country"
+    },
+    {
+      "name": "Banners"
     },
     {
       "name": "~~~~~~ Common ~~~~~~"
@@ -304,6 +310,25 @@
         }
       }
     },
+    "/v1/user/dashboard": {
+      "get": {
+        "tags": ["Dashboard"],
+        "summary": "Fetch Dashboard",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was processed successfully.",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
     "/v1/user/setting/changePassword": {
       "put": {
         "tags": ["Setting"],
@@ -426,14 +451,6 @@
         "summary": "Get All",
         "parameters": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiVTJGc2RHVmtYMStDNTgyYStXYmVGSWhTQmdmSm14dmNEcTNBWGVrV1h6OG43YzlmOTExYWpyWHNlYjV0UXF2UyIsInR5cGUiOiJBY2Nlc3MiLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3Mzc0NTQ2MTcsImV4cCI6MTczNzU0MTAxN30.80N4dpyHwG-LhesOBAV9EeA77571ACsyhFEkR-LP2lk"
-          },
-          {
             "name": "keyWord",
             "in": "query",
             "schema": {
@@ -457,6 +474,20 @@
             "example": "10"
           }
         ],
+        "responses": {
+          "200": {
+            "description": "The request was processed successfully.",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v1/user/banners": {
+      "get": {
+        "tags": ["Banners"],
+        "summary": "Get Banners",
         "responses": {
           "200": {
             "description": "The request was processed successfully.",

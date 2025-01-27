@@ -49,6 +49,9 @@
       "name": "Country"
     },
     {
+      "name": "Banners"
+    },
+    {
       "name": "~~~~~~ Common ~~~~~~"
     },
     {
@@ -473,6 +476,52 @@
         "responses": {
           "200": {
             "description": "The data was deleted successfully.",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v1/admin/banners": {
+      "post": {
+        "tags": ["Banners"],
+        "summary": "Create And Update",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "banners": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "noauthAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The data was created successfully.",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Banners"],
+        "summary": "Get Banners",
+        "responses": {
+          "200": {
+            "description": "The request was processed successfully.",
             "content": {
               "application/json": {}
             }

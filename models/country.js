@@ -14,6 +14,14 @@ const countrySchema = new Schema(
       type: String,
       required: true,
     },
+    exchangeRate: {
+      type: Number,
+      required: true,
+    },
+    currency: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

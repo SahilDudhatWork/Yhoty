@@ -33,7 +33,7 @@ const fundsTransfer = async (req, res) => {
     }
     payload.refTransId = result.refTransId;
     payload.statusId = result.statusId;
-    payload.credit = "credit";
+    payload.status = "credit";
     const balance = Number(getWallet.balance) + Number(body.amount);
     payload.balance = balance;
 

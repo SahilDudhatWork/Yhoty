@@ -11,6 +11,8 @@ const settingRoute = require("./setting");
 const cardRoute = require("./card");
 const walletRoute = require("./wallet");
 const countryRoute = require("./country");
+const dashboardRoute = require("./dashboard");
+const bannersRoute = require("./banners");
 const { userAuth } = require("../../middlewares/authToken/userAuth");
 const { checkPermission } = require("../../middlewares/checkPermission");
 
@@ -22,5 +24,7 @@ router.use(checkPermission);
 router.use("/card", cardRoute);
 router.use("/wallet", walletRoute);
 router.use("/country", countryRoute);
+router.use("/dashboard", dashboardRoute);
+router.use("/banners", bannersRoute);
 
 module.exports = router;

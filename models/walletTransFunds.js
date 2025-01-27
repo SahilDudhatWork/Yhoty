@@ -33,7 +33,6 @@ const collectionSchema = new Schema(
     },
     status: {
       type: String,
-      default: null,
       enum: ["credit", "debit"],
     },
   },
