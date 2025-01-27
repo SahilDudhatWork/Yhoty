@@ -10,7 +10,6 @@ const userRouter = require("./user/router");
 const commonRouter = require("./common/router");
 const swaggerRouter = require("./swagger/index");
 
-
 v1.use("/admin", adminRouter);
 v1.use("/user", userRouter);
 v1.use("/common", commonRouter);
