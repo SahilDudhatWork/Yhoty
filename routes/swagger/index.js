@@ -25,15 +25,25 @@ const userSwagger = fs.existsSync(userSwaggerPath)
 router.use("/admin/api-docs", swaggerUi.serve, swaggerUi.setup(adminSwagger));
 router.use("/user/api-docs", swaggerUi.serve, swaggerUi.setup(userSwagger));
 
-// Serve Swagger UI CSS File
+// Serve Swagger UI Assets
 router.get("/v1/swagger/user/api-docs/swagger-ui.css", (req, res) => {
   res.sendFile(
     path.join(__dirname, "../../node_modules/swagger-ui-dist/swagger-ui.css")
   );
 });
+
 router.get("/v1/swagger/user/api-docs/favicon-16x16.png", (req, res) => {
   res.sendFile(
     path.join(__dirname, "../../node_modules/swagger-ui-dist/favicon-16x16.png")
+  );
+});
+
+router.get("/v1/swagger/user/api-docs/swagger-ui-init.js", (req, res) => {
+  res.sendFile(
+    path.join(
+      __dirname,
+      "../../node_modules/swagger-ui-dist/swagger-ui-init.js"
+    )
   );
 });
 
