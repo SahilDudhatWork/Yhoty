@@ -31,5 +31,10 @@ router.get("/v1/swagger/user/api-docs/swagger-ui.css", (req, res) => {
     path.join(__dirname, "../../node_modules/swagger-ui-dist/swagger-ui.css")
   );
 });
+router.get("/v1/swagger/user/api-docs/favicon-16x16.png", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "../../node_modules/swagger-ui-dist/favicon-16x16.png")
+  );
+});
 
 module.exports = router;
