@@ -445,6 +445,45 @@
         }
       }
     },
+    "/v1/user/wallet/transfer": {
+      "get": {
+        "tags": ["Wallet"],
+        "summary": "Get All Transaction",
+        "parameters": [
+          {
+            "name": "keyWord",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "1"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "10"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was processed successfully.",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
     "/v1/user/country": {
       "get": {
         "tags": ["Country"],
