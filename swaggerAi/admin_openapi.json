@@ -321,9 +321,13 @@
               "schema": {
                 "type": "object",
                 "example": {
-                  "countryName": "India",
-                  "code": "356",
-                  "isoCode": "IN"
+                  "countryName": "Australia",
+                  "code": "036",
+                  "isoCode": "AU",
+                  "usaRate": 0.66,
+                  "franceRate": 0.61,
+                  "ukRate": 0.5,
+                  "currency": "AUD"
                 }
               }
             }
@@ -435,7 +439,11 @@
                 "example": {
                   "countryName": "String",
                   "code": "String",
-                  "isoCode": "String"
+                  "isoCode": "String",
+                  "usaRate": "Number",
+                  "franceRate": "Number",
+                  "ukRate": "Number",
+                  "currency": "String"
                 }
               }
             }

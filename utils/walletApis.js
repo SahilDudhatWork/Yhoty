@@ -90,7 +90,7 @@ const transferFunds = async (payload) => {
       <WalletIDFrom>${payload.walletIdFrom}</WalletIDFrom>
       <WalletIDTo>${payload.walletIdTo}</WalletIDTo>
       <Description>${payload.description}</Description>
-      <Amount>${payload.amount}</Amount>
+      <Amount>${payload.balance}</Amount>
     </Wallet_TransferFunds>
   </soap:Body>
 </soap:Envelope>`;

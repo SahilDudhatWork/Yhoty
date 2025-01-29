@@ -7,6 +7,10 @@ const transactionSchema = new Schema(
       type: ObjectId,
       required: true,
     },
+    cardId: {
+      type: ObjectId,
+      required: true,
+    },
     walletIdFrom: {
       type: String,
       required: true,
@@ -15,25 +19,20 @@ const transactionSchema = new Schema(
       type: String,
       required: true,
     },
-    amount: {
-      type: Number,
-      required: true,
-    },
     description: {
       type: String,
       default: "Fund Transfer",
+    },
+    balance: {
+      type: Number,
+      default: null,
     },
     refTransId: {
       type: String,
       default: null,
     },
-    statusId: {
-      type: String,
-      default: null,
-    },
     status: {
       type: String,
-      default: null,
       enum: ["credit", "debit"],
     },
   },

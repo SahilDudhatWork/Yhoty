@@ -14,7 +14,7 @@ const generateRandomString = (length) => {
 };
 
 // #region createNewCard
-const createNewCard = async (userData, walletData) => {
+const createNewCard = async (userData, walletData, body) => {
   const firstName = userData?.fullName?.split(" ")[1] || userData?.fullName;
   const lastName = userData?.fullName?.split(" ")[2] || generateRandomString(5);
 
@@ -42,12 +42,12 @@ const createNewCard = async (userData, walletData) => {
         <CardIssuerBinID>${CARD_ISSUER_BIN_ID}</CardIssuerBinID>
         <FirstName>${firstName}</FirstName>
         <LastName>${lastName}</LastName>
-        <AdrLine1>${userData.address1}</AdrLine1>
-        <AdrLine2>${userData?.address2 || null}</AdrLine2>
-        <City>${userData.city}</City>
-        <State>${userData?.state || ""}</State>
-        <Country>${userData.country}</Country>
-        <ZipCode>${userData.zipCode}</ZipCode>
+        <AdrLine1>${body.address1}</AdrLine1>
+        <AdrLine2>${body?.address2 || null}</AdrLine2>
+        <City>${body.city}</City>
+        <State>${body?.state || ""}</State>
+        <Country>${body.country}</Country>
+        <ZipCode>${body.zipCode}</ZipCode>
         <PhoneNumber>${phoneNumber}</PhoneNumber>
         <Custom1>${userData.email}</Custom1>
         <Custom2>${gender}</Custom2>
@@ -72,12 +72,12 @@ const createNewCard = async (userData, walletData) => {
   jsonResponse.cardIssuerBinId = CARD_ISSUER_BIN_ID;
   jsonResponse.firstName = firstName;
   jsonResponse.lastName = lastName;
-  jsonResponse.adrLine1 = userData.address1;
-  jsonResponse.adrLine2 = userData.address2 || null;
-  jsonResponse.city = userData.City;
-  jsonResponse.state = userData.state;
-  jsonResponse.country = userData.country;
-  jsonResponse.zipCode = userData.zipCode;
+  jsonResponse.adrLine1 = body.address1;
+  jsonResponse.adrLine2 = body.address2 || null;
+  jsonResponse.city = body.City;
+  jsonResponse.state = body.state;
+  jsonResponse.country = body.country;
+  jsonResponse.zipCode = body.zipCode;
   jsonResponse.phoneNumber = userData.phoneNumber;
   jsonResponse.custom = {
     c1: userData.email,
@@ -140,7 +140,7 @@ const addFundsToCard = async (payload) => {
         <ApiPassword>${API_PASSWORD}</ApiPassword>
         <WalletID>${payload.walletId}</WalletID>
         <CardToken>${payload.cardToken}</CardToken>
-        <Amount>${payload.amount}</Amount>
+        <Amount>${payload.balance}</Amount>
         <Description>${payload.description}</Description>
       </Card_AddFunds>
     </soap:Body>

@@ -48,6 +48,9 @@
       "name": "Wallet"
     },
     {
+      "name": "Transfer"
+    },
+    {
       "name": "Country"
     },
     {
@@ -314,6 +317,17 @@
       "get": {
         "tags": ["Dashboard"],
         "summary": "Fetch Dashboard",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["UK", "USA", "FRANCE"]
+            }
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -393,7 +407,21 @@
         "tags": ["Card"],
         "summary": "Create",
         "requestBody": {
-          "content": {}
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "adrLine1": "123 Main Street",
+                  "adrLine2": "Apartment 4B",
+                  "city": "New York",
+                  "state": "New York",
+                  "country": "840",
+                  "zipCode": "10001"
+                }
+              }
+            }
+          }
         },
         "responses": {
           "201": {
@@ -409,71 +437,6 @@
       "get": {
         "tags": ["Wallet"],
         "summary": "View Balance",
-        "responses": {
-          "200": {
-            "description": "The request was processed successfully.",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/v1/user/wallet/funds/transfer": {
-      "post": {
-        "tags": ["Wallet"],
-        "summary": "Funds Transfer",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": {
-                  "amount": "Number"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The request was processed successfully.",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/v1/user/wallet/transfer": {
-      "get": {
-        "tags": ["Wallet"],
-        "summary": "Get All Transaction",
-        "parameters": [
-          {
-            "name": "keyWord",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "schema": {
-              "type": "integer"
-            },
-            "example": "1"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "schema": {
-              "type": "integer"
-            },
-            "example": "10"
-          }
-        ],
         "responses": {
           "200": {
             "description": "The request was processed successfully.",
@@ -511,6 +474,159 @@
               "type": "integer"
             },
             "example": "10"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was processed successfully.",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v1/user/country/{countryId}": {
+      "get": {
+        "tags": ["Country"],
+        "summary": "Get Details",
+        "parameters": [
+          {
+            "name": "countryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was processed successfully.",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v1/user/transfer": {
+      "get": {
+        "tags": ["Transfer"],
+        "summary": "Get All",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["credit", "debit"]
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "1"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "10"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was processed successfully.",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v1/user/transfer/{cardId}": {
+      "get": {
+        "tags": ["Transfer"],
+        "summary": "Get Details",
+        "parameters": [
+          {
+            "name": "cardId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["credit", "debit"]
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "1"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": "10"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was processed successfully.",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v1/user/transfer/card/{transactionId}": {
+      "get": {
+        "tags": ["Transfer"],
+        "summary": "Get Details",
+        "parameters": [
+          {
+            "name": "transactionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
           }
         ],
         "responses": {

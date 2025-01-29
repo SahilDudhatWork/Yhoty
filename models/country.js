@@ -14,7 +14,15 @@ const countrySchema = new Schema(
       type: String,
       required: true,
     },
-    exchangeRate: {
+    usaRate: {
+      type: Number,
+      required: true,
+    },
+    franceRate: {
+      type: Number,
+      required: true,
+    },
+    ukRate: {
       type: Number,
       required: true,
     },

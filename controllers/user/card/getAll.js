@@ -28,8 +28,6 @@ const getAll = async (req, res) => {
             {
               $project: {
                 __v: 0,
-                token: 0,
-                password: 0,
               },
             },
           ],

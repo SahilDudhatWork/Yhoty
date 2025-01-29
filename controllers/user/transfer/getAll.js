@@ -1,4 +1,5 @@
-const Report = require("../../../models/report");
+const { ObjectId } = require("mongoose").Types;
+const Transaction = require("../../../models/transaction");
 const Response = require("../../../helper/response");
 const { handleException } = require("../../../helper/exception");
 const { paginationResponse } = require("../../../utils/paginationFormate");
@@ -9,65 +10,18 @@ const {
 } = require("../../../helper/constant");
 
 const getAll = async (req, res) => {
-  let { logger, query } = req;
+  let { logger, query, userId } = req;
   try {
-    let { keyWord, page, limit } = query;
+    let { page, limit, status } = query;
 
-    let qry = {};
-
-    if (keyWord) {
-      qry = {
-        $or: [
-          { description: { $regex: keyWord, $options: "i" } },
-          { "usersDetails.fullName": { $regex: keyWord, $options: "i" } },
-          { "usersDetails.email": { $regex: keyWord, $options: "i" } },
-          {
-            $expr: {
-              $regexMatch: {
-                input: { $toString: { $toLong: "$usersDetails.phoneNumber" } },
-                regex: keyWord,
-              },
-            },
-          },
-        ],
-      };
-    }
+    let qry = { status, userId: new ObjectId(userId) };
 
     const offset = parseInt(page) || 1;
     limit = parseInt(limit) || 10;
     const skip = limit * (offset - 1);
 
-    let [result] = await Report.aggregate([
-      {
-        $lookup: {
-          from: "users",
-          let: { userId: "$userId" },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $eq: ["$_id", "$$userId"],
-                },
-              },
-            },
-            {
-              $project: {
-                __v: 0,
-              },
-            },
-          ],
-          as: "usersDetails",
-        },
-      },
-      {
-        $unwind: {
-          path: "$usersDetails",
-          preserveNullAndEmptyArrays: true,
-        },
-      },
-      {
-        $match: qry,
-      },
+    let [result] = await Transaction.aggregate([
+      { $match: qry },
       {
         $facet: {
           paginatedResult: [

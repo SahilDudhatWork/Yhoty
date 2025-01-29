@@ -1,5 +1,5 @@
 const { ObjectId } = require("mongoose").Types;
-const WalletTransFunds = require("../../../models/walletTransFunds");
+const Transaction = require("../../../models/transaction");
 const Response = require("../../../helper/response");
 const { handleException } = require("../../../helper/exception");
 const { paginationResponse } = require("../../../utils/paginationFormate");
@@ -9,27 +9,19 @@ const {
   INFO_MSGS,
 } = require("../../../helper/constant");
 
-const getAll = async (req, res) => {
-  let { logger, query, userId } = req;
+const getCardTra = async (req, res) => {
+  let { logger, params, query } = req;
   try {
-    let { keyWord, page, limit } = query;
+    const { id } = params;
+    let { page, limit, status } = query;
 
-    let qry = { userId: new ObjectId(userId) };
-
-    if (keyWord) {
-      qry = {
-        $or: [
-          { status: { $regex: keyWord, $options: "i" } },
-          { refTransId: { $regex: keyWord, $options: "i" } },
-        ],
-      };
-    }
+    let qry = { status, cardId: new ObjectId(id) };
 
     const offset = parseInt(page) || 1;
     limit = parseInt(limit) || 10;
     const skip = limit * (offset - 1);
 
-    let [result] = await WalletTransFunds.aggregate([
+    let [result] = await Transaction.aggregate([
       { $match: qry },
       {
         $facet: {
@@ -39,8 +31,6 @@ const getAll = async (req, res) => {
             {
               $project: {
                 __v: 0,
-                token: 0,
-                password: 0,
               },
             },
           ],
@@ -72,5 +62,5 @@ const getAll = async (req, res) => {
 };
 
 module.exports = {
-  getAll,
+  getCardTra,
 };

@@ -70,6 +70,8 @@ module.exports = {
     OLD_NEW_PASSWORD_SAME:
       "The new password cannot be the same as the old password. Please choose a different password.",
     REPORT_ALREADY_ADDED: "A report has already been added for this card.",
+    CARD_ALREADY_EXIST:
+      "You cannot create more than one card for the same country.",
   },
 
   INFO_MSGS: {
